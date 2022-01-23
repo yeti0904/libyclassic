@@ -4,7 +4,7 @@
 
 // sending
 
-ServerConnection Client_Connect(char* ip, short port) {
+ServerConnection Client_Connect(const char* ip, short port) {
 	ServerConnection ret;
 	ret.err  = false;
 	ret.sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -28,7 +28,7 @@ ServerConnection Client_Connect(char* ip, short port) {
 	return ret;
 }
 
-bool Client_Auth(ServerConnection server, char* username, char* mppass) {
+bool Client_Auth(ServerConnection server, const char* username, const char* mppass) {
 	char*   paddedUsername = Util_PadString(username);;
 	char*   paddedMppass   = Util_PadString(mppass);
 	uint8_t tmpByte        = PACKET_CLIENT_AUTH;
@@ -145,7 +145,7 @@ bool Client_PositionUpdate(ServerConnection server, Vec3 pos, Orientation orient
 	return true;
 }
 
-bool Client_Message(ServerConnection server, char* message) {
+bool Client_Message(ServerConnection server, const char* message) {
 	char* paddedMessage = Util_PadString(message);
 	uint8_t tmpByte     = PACKET_CLIENT_MESSAGE;
 
